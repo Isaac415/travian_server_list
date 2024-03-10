@@ -27,7 +27,6 @@ def update_game_worlds(table):
             game_world_id = url.split('/')[3]
             search = GameWorld.objects.filter(id=game_world_id)
             if len(search) != 0:
-                print("Already has: " + str(game_world_id))
                 continue
         except:
             continue
