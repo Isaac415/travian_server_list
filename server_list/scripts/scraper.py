@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 import hashlib
-from gameworld import GameWorld
+from travian_server_list.scripts.gameworld import GameWorld
 
 URL = "https://blog.travian.com/gameworld-schedule/"
 
@@ -17,7 +17,7 @@ def get_game_world_rows(table):
     return table.find_all('tr')[1: ]
 
 def tokenize_game_worlds(game_worlds_rows):
-    game_words = list() # list of GameWorld objects
+    game_words = list()
     for row in game_worlds_rows:
         lines = row.find_all("td")
         try:
@@ -26,8 +26,7 @@ def tokenize_game_worlds(game_worlds_rows):
         except:
             url, game_world_id = None, None
 
-        region = lines[0].text.strip().split()[:-1]
-        server = lines[0].text.strip().split()[-1:]
+        server = lines[0].text.strip()
         speed = lines[1].text.strip()
         win_condition = lines[2].text.strip()
         num_of_tribes = lines[3].text.strip()
@@ -36,18 +35,11 @@ def tokenize_game_worlds(game_worlds_rows):
         artifacts_spawn_date = lines[6].text.strip()
         building_plans_spwan_date = lines[7].text.strip()
         end_condition = lines[8].text.strip()
-        '''
-        game_words.append(GameWorld(url, server_id, server_number, speed,
+
+        game_words.append(GameWorld(url, game_world_id, server, speed,
                                     win_condition, num_of_tribes,
                                     start_date, start_time, artifacts_spawn_date,
                                     building_plans_spwan_date, end_condition))
-        '''
-        print("Region: " + str(region))
-        print("Server: " + str(server))
-        print()
+
     return game_words
 
-
-table = get_table()
-game_worlds_rows = get_game_world_rows(table)
-tokenize_game_worlds(game_worlds_rows)
