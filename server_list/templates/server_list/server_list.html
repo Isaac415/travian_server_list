@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Server List</title>
+    <title>Travian Server List</title>
+    <link rel="stylesheet" type="text/css" href="https://bootswatch.com/5/zephyr/bootstrap.min.css">
 </head>
 <body>
-    <h1>Servers</h1>
+    {% include 'server_list/navbar.html' %}
+    {% include 'server_list/list.html' %}
+    <h1>Travian Server List</h1>
     <p>Last Update: {{ last_update }}</p>
     <ul>
         {% for gameworld in gameworlds %}
-            <li>{{ gameworld.server }}</li>
+            <li>{{ gameworld.speed }}</li>
         {% endfor %}
     </ul>
 </body>

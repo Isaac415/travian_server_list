@@ -122,5 +122,4 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
 SERVER_LIST_LAST_UPDATE = 0
